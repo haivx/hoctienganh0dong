@@ -1,8 +1,10 @@
 module.exports = () => ({
     module: {
-        rules: [{
-            test: /\.css$/i,
-            use: ['style-loader', 'css-loader'],
-        }, ],
-    },
-});
+      rules: [
+        {
+          test: /\.(css|scss)$/,
+          use: ["style-loader", "css-loader",  "postcss-loader", "sass-loader"]
+        }
+      ]
+    }
+  });
