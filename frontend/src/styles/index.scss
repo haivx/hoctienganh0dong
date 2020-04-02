@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+section {
+    background-color: lightblue;
+}
+
+.titleReason {
+    margin-top: 30px;
+    width: 100%;
+    p {
+        font-size: 17px;
+    }
+    h2 {
+        font-weight: bold;
+        font-size: 30px;
+        color: #ff6500;
+        &:after {
+            display: block;
+            margin: 0 auto;
+            margin-top: 17px;
+            width: 170px;
+            height: 2px;
+            background: #576dff;
+            content: "";
+        }
+    }
+}
+
+.specialBox {
+    min-height: 500px;
+    background: rgba(128, 128, 128, 0.11);
+    transition: 0.3s;
+    .specialContent h4 {
+        color: white;
+        filter: grayscale(0);
+    }
+    .specialImage {
+        padding: 2px;
+        overflow: hidden;
+        transition: 0.3s;
+        img {
+            transition: 0.3s;
+            filter: grayscale(100%);
+        }
+    }
+    .specialIcon {
+        text-align: center;
+        margin: 10px;
+        font-size: 40px;
+        color: #556af8;
+        filter: grayscale(100%);
+    }
+    &:hover {
+        .specialIcon {
+            filter: grayscale(0);
+        }
+        .specialImage {
+            img {
+                filter: grayscale(0);
+            }
+        }
+        .specialContent {
+            h4 {
+                filter: grayscale(0);
+            }
+        }
+    }
+    .specialContent {
+        h4 {
+            text-align: center;
+            color: #ff6500;
+            filter: grayscale(100%);
+            font-weight: bold;
+        }
+        p {
+            text-align: center;
+            padding: 15px;
+        }
+    }
+}
