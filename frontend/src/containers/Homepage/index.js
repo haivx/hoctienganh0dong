@@ -6,6 +6,9 @@ import teacherHref from "../../assets/teacher.png";
 import classHref from "../../assets/class.png";
 import coachHref from "../../assets/coach.png";
 import methodHref from "../../assets/method.png";
+import course1 from "../../assets/english.png";
+import course2 from "../../assets/korean.png";
+import course3 from '../../assets/japanese.png';
 
 const HomePage = () => {
     return (
@@ -14,7 +17,7 @@ const HomePage = () => {
                 <img src={img} />
             </div>
             <div className="titleReason">
-                <div class="text-center mt-15">
+                <div className="text-center mt-15">
                     <h2>ĐIỂM KHÁC BIỆT CỦA CHÚNG TÔI ?</h2>
                     <p className="text-center mb-4 mt-1">
                         Với chúng tôi, giúp học viên thành công là niềm hạnh phúc. Quan tâm tới học viên là phương châm
@@ -85,6 +88,68 @@ const HomePage = () => {
                                     Phương pháp học V.A.K (Hình ảnh - Âm thanh - Vận động trò chơi) giúp học viên nhớ
                                     bài ngay tại lớp học
                                 </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="titleReason">
+                <div className="text-center mt-15">
+                    <h2>CÁC KHÓA HỌC</h2>
+                </div>
+
+                <div className="flex p-3">
+                    <div className="sm:w-1/2 md:w-1/2 lg:w-1/4">
+                        <div className="title-courses">
+                            <h3 className="mb-3">Khóa học của chúng tôi</h3>
+                            <p>
+                                Học tập là không có điểm dừng. Không phải bạn đọc xong một cuốn sách, qua một kì thi hay
+                                kết thúc một chương trình học. Trong cả cuộc đời mình, từ lúc bạn sinh ra là bạn đã bắt
+                                đầu học....
+                                <br />
+                            </p>
+                            <blockquote className="blockquote">
+                                <i>Education is the most powerful weapon which you can use to change the world.</i>
+                                <footer className="blockquote-footer">Nelson Mandela</footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div className="sm:w-1/2 md:w-1/2 lg:w-1/4">
+                        <div className="courses">
+                            <div className="featured_image_courses">
+                                <div className="icon"></div>
+                                <img src={course1} alt="" className="img-fluid" />
+                            </div>
+                            <div className="course_text_content">
+                                <a>
+                                    <button>Tiếng Anh 0 đồng Basic</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sm:w-1/2 md:w-1/2 lg:w-1/4">
+                        <div className="courses">
+                            <div className="featured_image_courses">
+                                <div className="icon"></div>
+                                <img src={course2} alt="" className="img-fluid" />
+                            </div>
+                            <div className="course_text_content">
+                                <a>
+                                    <button>Tiếng Hàn 0 đồng</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sm:w-1/2 md:w-1/2 lg:w-1/4">
+                        <div className="courses">
+                            <div className="featured_image_courses">
+                                <div className="icon"></div>
+                                <img src={course3} alt="" className="img-fluid" />
+                            </div>
+                            <div className="course_text_content">
+                                <a>
+                                    <button>Tiếng Anh 0 đồng Advanced</button>
+                                </a>
                             </div>
                         </div>
                     </div>

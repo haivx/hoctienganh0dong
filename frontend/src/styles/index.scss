@@ -37,7 +37,6 @@ section {
 
 .specialBox {
     min-height: 500px;
-    background: rgba(128, 128, 128, 0.11);
     transition: 0.3s;
     .specialContent h4 {
         color: white;
@@ -86,4 +85,70 @@ section {
             padding: 15px;
         }
     }
+}
+
+.title-courses {
+    margin-top: 20px;
+    h3 {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    p {
+        padding: 1rem;
+    }
+}
+
+.featured_image_courses {
+    overflow: hidden;
+    img {
+        transition: 0.6s;
+    }
+    .icon {
+        position: absolute;
+        top: 0;
+        right: 20px;
+        width: 60px;
+        height: 30px;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        img {
+            width: 60px;
+            height: 30px;
+            background: white;
+        }
+    }
+}
+.course_text_content {
+    padding: 10px;
+    text-align: center;
+    background: #ff6500;
+    cursor: pointer;
+    a {
+        font-size: 18px;
+        text-decoration: none;
+        color: white;
+        min-width: 200px;
+    }
+}
+.courses {
+    padding: 1rem;
+    &:hover {
+        .featured_image_courses {
+            img {
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+.footer {
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: #ff6500;
+    padding: 6px;
+    color: white;
 }
