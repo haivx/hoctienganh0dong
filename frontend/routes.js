@@ -11,7 +11,11 @@ const AsyncLoginPage = Loadable({
 const AsyncHomePage = Loadable({
     loader: () => import("Containers/Homepage"),
     loading: Loading
-});
+})
+const AsyncAdminPage = Loadable({
+    loader: () => import("Containers/AdminPage"),
+    loading: Loading
+});;
 
 export default () => {
     return (
@@ -19,6 +23,7 @@ export default () => {
             <Switch>
                 <Route exact path="/" component={AsyncHomePage} />
                 <Route exact path="/login" component={AsyncLoginPage} />
+                <Route exact path="/admin" component={AsyncAdminPage} />
             </Switch>
         </Router>
     );

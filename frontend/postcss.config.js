@@ -1,7 +1,10 @@
-const tailwindcss = require('tailwindcss');
+const tailwindcss = require("tailwindcss");
 
 module.exports = {
-    plugins: [
-      require('tailwindcss'),
-    ]
-  }
+    plugins: [require("tailwindcss")],
+    extend: {
+        colors: {
+            mainColor: "#ff6500",
+        },
+    },
+};
