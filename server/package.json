@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon --max_old_space_size=4099 ./bin/www",
+    "sequelize": "cross-env NODE_PATH=. sequelize",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,6 +17,7 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -23,7 +25,8 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "pg": "^8.3.0",
-    "sequelize": "^5.22.3"
+    "sequelize": "^5.22.3",
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",

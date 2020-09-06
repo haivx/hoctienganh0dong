@@ -1,17 +1,19 @@
 import db from '../models';
 const models = db.sequelize.models;
 
-export const login = async function(req, res, next) {
-    // const { email, password } = req.body;
-    // const response = await models.User.login({
-    //     email,
-    //     password,
-    // });
-    res.json({
-        a: 1
-    });
+const login = async function(req, res, next) {
+    const { email, password } = req.body;
+    console.log('BODY', models.User)
+    const response = await models.User.login(
+        email,
+        password,
+    );
+    console.log('RESOPONSE', response)
+    res.send({
+        a: 123
+    })
 }
 
-// export default {
-//     login
-// };
+module.exports = {
+    login
+}

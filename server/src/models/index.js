@@ -1,21 +1,15 @@
 const fs = require('fs')
 const path = require('path')
 import Sequelize from 'sequelize';
-
-export const sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialectOptions: {
-        ssl: false,
-        dateStrings: true
-    },
-    logging: false
-})
+import { development as dbConfig } from '../../bin/database';
+export const sequelize = new Sequelize(dbConfig)
 
 let db = {}
 
 fs.readdirSync(__dirname)
-.filter((file) => file.indexOf('.') !== 0 && file !== 'index.js')
+.filter((file) => file.indexOf('.') !== 0 && file !== 'index.js' && (file.slice(-3) === '.js'))
 .forEach(function(file) {
-    const model = sequelize.import(path.join(__dirname, file, 'index.js'));
+    const model = sequelize.import(path.join(__dirname, file));
     db[model.name] = model
 })
 
