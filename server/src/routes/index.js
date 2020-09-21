@@ -1,8 +1,8 @@
 const express = require('express')
-import user from './user'
+import auth from './auth'
  function routes () {
     const router = express.Router();
-    router.use('/user', user());
+    router.use('/auth', auth());
 
     return router;
 }
