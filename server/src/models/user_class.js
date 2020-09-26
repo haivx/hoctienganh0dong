@@ -3,12 +3,12 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Users_class extends Model {
+  class UserClass extends Model {
     static associate(models) {
-      Users_class.belongsTo(models.User, {as: 'users', foreignKey: "id" });
+      UserClass.belongsTo(models.User, {as: 'user', foreignKey: "student_id" });
     }
   };
-  Users_class.init({
+  UserClass.init({
     id: {
       primaryKey: true,
       type: DataTypes.INTEGER,
@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     courser_id: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Users_class',
+    modelName: 'UserClass',
+    tableName: 'users_classes'
   });
-  return Users_class;
+  return UserClass;
 };

@@ -3,7 +3,7 @@
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         await queryInterface.bulkInsert(
-            "Users",
+            "users",
             [
                 {
                     id: 1,
@@ -14,18 +14,6 @@ module.exports = {
                     avatar:
                         "https://avatars1.githubusercontent.com/u/25798759?s=460&u=aff0bcc9b5a74eebc36e16a9b00b893cb8b69fd6&v=4",
                     full_name: "Xuan Hai",
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
-                {
-                    id: 2,
-                    role_id: 1,
-                    email: "toiditimtoi@gmail.com",
-                    encryptedPassword: "11122",
-                    phone: 87653536,
-                    avatar:
-                        "https://avatars1.githubusercontent.com/u/25798759?s=460&u=aff0bcc9b5a74eebc36e16a9b00b893cb8b69fd6&v=4",
-                    full_name: "Hai Xuan",
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
@@ -41,6 +29,6 @@ module.exports = {
          * Example:
          * await queryInterface.bulkDelete('People', null, {});
          */
-        await queryInterface.bulkDelete('Users', null, {});
+        await queryInterface.bulkDelete('users', null, {});
     },
 };
