@@ -7,8 +7,8 @@ module.exports = {
             [
                 {
                     id: 1,
-                    role_id: 1,
-                    email: "haivx0206@gmail.com",
+                    role_id: 2,
+                    email: "xuanhaiiea@gmail.com",
                     encryptedPassword: "11111",
                     phone: 989838891,
                     avatar:

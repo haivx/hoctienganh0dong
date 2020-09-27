@@ -10,12 +10,6 @@ module.exports = {
       },
       role_id: {
         type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'roles',
-          },
-          key: 'id'
-        },
         allowNull: false
       },
       email: Sequelize.STRING,

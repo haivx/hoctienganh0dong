@@ -6,8 +6,8 @@ module.exports = {
             "roles",
             [
                 {
-                    id: 1,
-                    role_name: "admin",
+                    id: 2,
+                    role_name: "super_admin",
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
