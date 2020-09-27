@@ -28,7 +28,7 @@ class API {
 
     post = (path = "", params = {}, callback) => {
         axios
-            .post(`${server}${path}`, params, {
+            .post(`${server}/${path}`, params, {
                 headers: {
                     Authorization: this.authorization(),
                 },
