@@ -2,7 +2,7 @@ import axios from 'axios';
 import get from "lodash/get";
 import { useQuery } from "./helpers";
 
-const server = window.location.origin;
+const server = "http://localhost:5000/v1";
 
 class API {
     authorization = () => {
@@ -18,7 +18,7 @@ class API {
                 },
             })
             .then((response) => {
-                callback(response);
+                callback(response.data);
             })
             .catch((error) => {
                 let errMsg = get(error, "response.data.error", "");
@@ -35,10 +35,10 @@ class API {
             })
             .then((response) => {
                 console.log(response);
-                callback(response);
+                callback(response.data);
             })
             .catch((error) => {
-                let error_message = get(error, "response.data.error", "");
+                let error_message = get(error, "response.data.message", "");
                 callback(null, error_message);
             });
     };

@@ -1,9 +1,26 @@
 import React, { Fragment } from "react";
-import routes from './routes';
-import './src/styles/index.scss';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import routes from "./routes";
+import "./src/styles/index.scss";
 
 const App = () => {
-    return <Fragment>{routes()}</Fragment>
-}
+    return (
+        <Fragment>
+            {routes()}
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+        </Fragment>
+    );
+};
 
 export default App;

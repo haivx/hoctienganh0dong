@@ -181,16 +181,9 @@ const Layout = ({ children }) => {
                 <>
                     <div className="fixed text-white flex w-full">
                         <div className="w-1/4 h-12 p-2 font-bold text-sm">Hotline: 04.7307.6699</div>
-                        <Typography
-                            className=" hover:no-underline w-3/4 h-12 flex justify-end p-2"
-                            variant="body2"
-                            color="textSecondary"
-                            align="center"
-                        >
-                            <Link className="pr-4 cursor-pointer" href="/login">
-                                Login
+                        <Link className="pr- s4 cursor-pointer" href="/login">
+                        Login
                             </Link>
-                        </Typography>
                     </div>
 
                     {children}
