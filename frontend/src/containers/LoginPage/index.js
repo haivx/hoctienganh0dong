@@ -18,6 +18,7 @@ const LoginPage = () => {
                 const currentUser = { ...auth.user, company: auth.company };
                 dispatch({ type: "LOGIN", currentUser });
                 localStorage.setItem("auth", JSON.stringify(res.data));
+                toast(res.message, {type: toast.TYPE.SUCCESS})
             }
         });
     };

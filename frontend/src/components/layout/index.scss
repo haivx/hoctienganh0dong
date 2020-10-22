@@ -1,0 +1,14 @@
+.header-home {
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    .login {
+        padding: 5px;
+        a {
+            &:visited {
+                color: white;
+            }
+        }
+    }
+}

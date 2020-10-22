@@ -1,4 +1,5 @@
 import db from '../models';
+import userServices from "../services/userServices";
 const models = db.sequelize.models;
 
 const login = async function(req, res, next) {
@@ -10,9 +11,7 @@ const login = async function(req, res, next) {
             password,
         );
         console.log('RESOPONSE', response)
-        res.send({
-            a: 123
-        })
+        res.send(response)
     } catch (err) {
         console.error('errr', err)
         res.send({
@@ -21,6 +20,18 @@ const login = async function(req, res, next) {
     }
 }
 
+const  register = async(req, res, next) => {
+    const params = req.body;
+  
+    userServices
+      .signUp(params)
+      .then(response => {
+        response ? res.json(response) : res.json({});
+      })
+      .catch(err => next(err));
+  }
+
 module.exports = {
-    login
+    login,
+    register
 }

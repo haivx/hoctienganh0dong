@@ -1,104 +1,208 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Layout from "Components/layout";
-import MaterialTable from "material-table";
-import Check from "@material-ui/icons/Check";
+import { Table, Button, PageHeader, Modal, Form, Input } from "antd";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { checkFormatEmail } from "Utils/helpers";
+import Api from 'Utils/Api'
 
-import DeleteOutline from "@material-ui/icons/DeleteOutline";
-import Add from "@material-ui/icons/Add";
-import Clear from "@material-ui/icons/Clear";
-import Edit from "@material-ui/icons/Edit";
-import Search from "@material-ui/icons/Search";
-import Remove from "@material-ui/icons/Remove";
-import FirstPage from "@material-ui/icons/FirstPage";
-import LastPage from "@material-ui/icons/LastPage";
-import ChevronLeft from "@material-ui/icons/ChevronLeft";
-import ChevronRight from "@material-ui/icons/ChevronRight";
+import "./index.scss";
+
+const data = [
+    {
+        key: "1",
+        name: "John Brown",
+        age: 32,
+        address: "New York No. 1 Lake Park",
+        email: "job@gmail.com",
+        roles: "mod",
+        phone: "0989838891",
+    },
+    {
+        key: "2",
+        name: "Jim Green",
+        age: 42,
+        address: "London No. 1 Lake Park",
+        email: "job@gmail.com",
+        roles: "admin",
+        phone: "0989838891",
+    },
+    {
+        key: "3",
+        name: "Joe Black",
+        age: 32,
+        address: "Sidney No. 1 Lake Park",
+        email: "job@gmail.com",
+        roles: "admin",
+        phone: "0989838891",
+    },
+];
 
 const AdminPage = () => {
-    const [state, setState] = React.useState({
-        columns: [
-            { title: "Name", field: "name" },
-            { title: "Address", field: "address" },
-            { title: "email", field: "email", type: "email" },
-            {
-                title: "Role",
-                field: "role",
-                lookup: { 1: "Admin", 2: "SuperAmind", 3: "Member" },
-            },
-        ],
-        data: [
-            { name: "Nguyen Hoang", address: "121 Nguyen Khang, Cau Giay, HN", email: "Barang@mail.com", role: 1 },
-            {
-                name: "Le Van A",
-                surname: "55 Nguyen Phong Sac, Cau Giay, Hn",
-                email: "aLevan@gmail.com",
-                role: 3,
-            },
-            {
-                name: "Xuan Hai",
-                surname: "1 Ha Dong, Ha Noi",
-                email: "haixuan@gmail.com",
-                role: 2,
-            },
-        ],
+    const emailRef = useRef(null);
+    const [state, setState] = useState({
+        visibleAdd: false,
     });
+
+    const _setState = (data) => {
+        setState((prevState) => ({
+            ...prevState,
+            ...data,
+        }));
+    };
+
+    if (emailRef.current) {
+        debugger;
+        const isValidEmail = checkFormatEmail(email.current.value);
+        if (!validEmail) {
+            emailRef.current.setCustomValidity("Email is invalid");
+        } else {
+            emailRef.current.setCustomValidity("");
+        }
+    }
+    const columns = [
+        {
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
+            render: (text) => <a>{text}</a>,
+        },
+        {
+            title: "Age",
+            dataIndex: "age",
+            key: "age",
+        },
+        {
+            title: "Email",
+            dataIndex: "email",
+            key: "email",
+        },
+        {
+            title: "Email",
+            dataIndex: "email",
+            key: "email",
+        },
+        {
+            title: "Phone",
+            dataIndex: "phone",
+            key: "phone",
+        },
+        {
+            title: "Roles",
+            dataIndex: "roles",
+            key: "roles",
+        },
+        {
+            title: "Action",
+            key: "action",
+            render: (text, record) => (
+                <div className="btn-action">
+                    <Button type="primary" icon={<EditOutlined />}>
+                        Edit
+                    </Button>
+                    <Button type="danger" icon={<DeleteOutlined />}>
+                        Delete
+                    </Button>
+                </div>
+            ),
+        },
+    ];
+    const handleOpenAdd = () => {
+        _setState({
+            visibleAdd: true,
+        });
+    };
+
+    const handleCancel = () => {
+        _setState({
+            visibleAdd: false,
+        });
+    };
+    const onAdd = (value) => {
+        console.log("xxx", value);
+        Api.post(`auth/register`, value, (res, error) => {
+            console.log('res, error', res, error)
+        })
+    };
+    const layout = {
+        labelCol: { span: 8 },
+        wrapperCol: { span: 16 },
+      };
+      const tailLayout = {
+        wrapperCol: { offset: 8, span: 16 },
+      };
+      
     return (
         <Layout>
-            <MaterialTable
-                icons={{
-                    Add: Add,
-                    Edit: Edit,
-                    Delete: DeleteOutline,
-                    Check: Check,
-                    Clear: Clear,
-                    Search: Search,
-                    ThirdStateCheck: Remove,
-                    FirstPage: FirstPage,
-                    LastPage: LastPage,
-                    NextPage: ChevronRight,
-                    PreviousPage: ChevronLeft,
-                }}
-                title="Users's List"
-                columns={state.columns}
-                data={state.data}
-                editable={{
-                    onRowAdd: (newData) =>
-                        new Promise((resolve) => {
-                            setTimeout(() => {
-                                resolve();
-                                setState((prevState) => {
-                                    const data = [...prevState.data];
-                                    data.push(newData);
-                                    return { ...prevState, data };
-                                });
-                            }, 600);
-                        }),
-                    onRowUpdate: (newData, oldData) =>
-                        new Promise((resolve) => {
-                            setTimeout(() => {
-                                resolve();
-                                if (oldData) {
-                                    setState((prevState) => {
-                                        const data = [...prevState.data];
-                                        data[data.indexOf(oldData)] = newData;
-                                        return { ...prevState, data };
-                                    });
-                                }
-                            }, 600);
-                        }),
-                    onRowDelete: (oldData) =>
-                        new Promise((resolve) => {
-                            setTimeout(() => {
-                                resolve();
-                                setState((prevState) => {
-                                    const data = [...prevState.data];
-                                    data.splice(data.indexOf(oldData), 1);
-                                    return { ...prevState, data };
-                                });
-                            }, 600);
-                        }),
-                }}
-            />
+            <div className="admin-page">
+                <PageHeader
+                    ghost={false}
+                    // onBack={() => window.history.back()}
+                    title="Admin"
+                    subTitle=""
+                    extra={[
+                        <Button key="1" type="primary" onClick={handleOpenAdd}>
+                            Thêm mới
+                        </Button>,
+                    ]}
+                >
+                    <Table
+                        columns={columns}
+                        dataSource={data}
+                        pagination={false}
+                    />
+                    <Modal
+                        title="Thêm mới"
+                        visible={state.visibleAdd}
+                        onCancel={handleCancel}
+                        footer={null}
+                    >
+                        <Form name="basic" onFinish={onAdd} {...layout}>
+                            <Form.Item
+                                label="Username"
+                                name="username"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Please input your username!",
+                                    },
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
+
+                            <Form.Item
+                                label="Email"
+                                name="email"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Please input your email!",
+                                    },
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item
+                                label="Password"
+                                name="password"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Please input your password!",
+                                    },
+                                ]}
+                            >
+                                <Input.Password />
+                            </Form.Item>
+                            <Form.Item {...tailLayout}>
+                                <Button type="primary" htmlType="submit">
+                                    Submit
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                    </Modal>
+                </PageHeader>
+            </div>
         </Layout>
     );
 };

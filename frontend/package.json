@@ -21,7 +21,7 @@
     },
     "homepage": "https://github.com/haivx/hoctienganh0dong#readme",
     "dependencies": {
-        "@ant-design/icons": "^4.0.5",
+        "@ant-design/icons": "^4.2.2",
         "@babel/core": "^7.8.7",
         "@babel/plugin-proposal-class-properties": "^7.10.4",
         "@babel/preset-env": "^7.8.7",
