@@ -9,9 +9,8 @@ async function signUp(params) {
         const salt = bcrypt.genSaltSync(10);
         passwordHash = bcrypt.hashSync(params.password, salt);
     }
-    console.log("passwordHash", passwordHash);
+
     return await User.create({
-        id: 1,
         role_id: 1,
         email: params.email,
         encryptedPassword: passwordHash,
@@ -19,9 +18,6 @@ async function signUp(params) {
     })
         .then(async (result) => {
             let newUser = result;
-            // const newCustomer = await Customer.create({
-            //     user_id: newUser.id,
-            // });
             const jwtToken = jwt.sign(
                 { payload: newUser.dataValues.id },
                 process.env.API_KEY,
@@ -29,11 +25,13 @@ async function signUp(params) {
                     expiresIn: "365d",
                 }
             );
-            // newUser.dataValues.customer_id = newCustomer.dataValues.id;
-            // newUser.dataValues.avatar_url = params.avatar_url
             return {
                 success: true,
-                user: newUser,
+                user: {
+                    avatar: newUser.avatar,
+                    mail: newUser.email,
+                    full_name: newUser.full_name   
+                },
                 token: jwtToken,
             };
         })

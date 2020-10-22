@@ -44,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
             id: {
                 primaryKey: true,
                 type: DataTypes.INTEGER,
+                autoIncrement: true,
             },
             email: DataTypes.STRING,
             encryptedPassword: DataTypes.STRING,
