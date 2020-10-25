@@ -54,6 +54,8 @@ module.exports = ({ mode = "production", presets = [] }) => {
                     Containers: path.resolve(__dirname, "src/containers"),
                     Styles: path.resolve(__dirname, "src/styles"),
                     Utils: path.resolve(__dirname, "src/utils"),
+                    Store: path.resolve(__dirname, "src/store"),
+                    Action: path.resolve(__dirname, "src/store/actions"),
                 },
             },
         },

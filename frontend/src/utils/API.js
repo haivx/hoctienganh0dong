@@ -13,9 +13,9 @@ class API {
         axios
             .get(`${server}${path}`, {
                 params,
-                headers: {
-                    Authorization: this.authorization,
-                },
+                // headers: {
+                //     Authorization: this.authorization,
+                // },
             })
             .then((response) => {
                 callback(response.data);

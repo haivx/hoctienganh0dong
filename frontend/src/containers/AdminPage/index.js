@@ -1,8 +1,11 @@
-import React, { useState, useRef } from "react";
-import Layout from "Components/layout";
+import React, { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify'
+
 import { Table, Button, PageHeader, Modal, Form, Input } from "antd";
+import Layout from "Components/layout";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { checkFormatEmail } from "Utils/helpers";
+import userAction from 'Action/userAction';
 import Api from 'Utils/Api'
 
 import "./index.scss";
@@ -38,7 +41,8 @@ const data = [
 ];
 
 const AdminPage = () => {
-    const emailRef = useRef(null);
+    const dispatch = useDispatch();
+    const listUser = useSelector(state => state.user)
     const [state, setState] = useState({
         visibleAdd: false,
     });
@@ -50,15 +54,10 @@ const AdminPage = () => {
         }));
     };
 
-    if (emailRef.current) {
-        debugger;
-        const isValidEmail = checkFormatEmail(email.current.value);
-        if (!validEmail) {
-            emailRef.current.setCustomValidity("Email is invalid");
-        } else {
-            emailRef.current.setCustomValidity("");
-        }
-    }
+    useEffect(() => {
+        dispatch(userAction.fetchUsers())
+    }, [dispatch])
+
     const columns = [
         {
             title: "Name",
@@ -112,15 +111,20 @@ const AdminPage = () => {
         });
     };
 
-    const handleCancel = () => {
+    const handleClose = () => {
         _setState({
             visibleAdd: false,
         });
     };
     const onAdd = (value) => {
-        console.log("xxx", value);
         Api.post(`auth/register`, value, (res, error) => {
-            console.log('res, error', res, error)
+            if(res.code === 0 ) {
+                toast('THÊM MỚI THÀNH CÔNG', {type: toast.TYPE.SUCCESS});
+                handleClose()
+                dispatch(userAction.fetchUsers());
+            } else {
+                toast(res.message, {type: toast.TYPE.ERROR});
+            }
         })
     };
     const layout = {
@@ -147,13 +151,13 @@ const AdminPage = () => {
                 >
                     <Table
                         columns={columns}
-                        dataSource={data}
+                        dataSource={listUser.data}
                         pagination={false}
                     />
                     <Modal
                         title="Thêm mới"
                         visible={state.visibleAdd}
-                        onCancel={handleCancel}
+                        onCancel={handleClose}
                         footer={null}
                     >
                         <Form name="basic" onFinish={onAdd} {...layout}>

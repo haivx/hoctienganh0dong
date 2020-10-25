@@ -10,6 +10,15 @@ async function signUp(params) {
         passwordHash = bcrypt.hashSync(params.password, salt);
     }
 
+    const existRecord = await User.findOne({ email: params.email })
+
+
+    if(existRecord.id) {
+        return {
+            code: -1,
+            message: 'Email is exist!'
+        }
+    }
     return await User.create({
         role_id: 1,
         email: params.email,
@@ -17,22 +26,14 @@ async function signUp(params) {
         username: params.firstName,
     })
         .then(async (result) => {
-            let newUser = result;
-            const jwtToken = jwt.sign(
-                { payload: newUser.dataValues.id },
-                process.env.API_KEY,
-                {
-                    expiresIn: "365d",
-                }
-            );
             return {
+                code: 0,
                 success: true,
                 user: {
-                    avatar: newUser.avatar,
-                    mail: newUser.email,
-                    full_name: newUser.full_name   
+                    avatar: result.avatar,
+                    mail: result.email,
+                    full_name: result.full_name   
                 },
-                token: jwtToken,
             };
         })
         .catch(Sequelize.ValidationError, (error) => {
