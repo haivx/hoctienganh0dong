@@ -56,6 +56,7 @@ module.exports = ({ mode = "production", presets = [] }) => {
                     Utils: path.resolve(__dirname, "src/utils"),
                     Store: path.resolve(__dirname, "src/store"),
                     Action: path.resolve(__dirname, "src/store/actions"),
+                    Resources: path.resolve(__dirname, "src/assets"),
                 },
             },
         },

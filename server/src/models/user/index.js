@@ -1,5 +1,6 @@
 "use strict";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
@@ -22,13 +23,15 @@ module.exports = (sequelize, DataTypes) => {
                         message: "Email has not registered yet",
                     };
 
-                if (
-                    bcrypt.compareSync(password, user.encryptedPassword || "")
-                ) {
-                    const loginDetail = await user.getLoginDetail();
+                if (bcrypt.compareSync(password, user.encryptedPassword || "")) {
+                    const jwtToken = jwt.sign({ payload: this.id }, process.env.API_KEY, { expiresIn: "365d" });
                     return {
+                        code: 0,
                         success: true,
-                        ...loginDetail,
+                        data: {
+                            user,
+                            jwtToken,
+                        }
                     };
                 } else {
                     return {

@@ -155,3 +155,15 @@ section {
     padding: 6px;
     color: white;
 }
+
+.ant-table {
+    table {
+        thead {
+            tr {
+                th {
+                    background: #15d56b;
+                }
+            }
+        }
+    }
+}

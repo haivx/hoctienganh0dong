@@ -10,9 +10,9 @@ async function signUp(params) {
         passwordHash = bcrypt.hashSync(params.password, salt);
     }
 
-    const existRecord = await User.findOne({ email: params.email })
+    const existRecord = await User.findOne({ where: { email: params.email || '' } }) || {}
 
-
+    console.log('existRecord', existRecord, params.email)
     if(existRecord.id) {
         return {
             code: -1,

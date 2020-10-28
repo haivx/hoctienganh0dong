@@ -14,4 +14,4 @@
 ```
 
 - Note: Because of table relationship, be aware of ordering migration file.
-- User account: xuanhai/admin
+- User account: nobody@gmail.com/123456

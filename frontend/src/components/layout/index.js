@@ -1,65 +1,69 @@
 import React, { Fragment, useState } from "react";
-import { Layout, Menu } from "antd";
-import {
-    DesktopOutlined,
-    PieChartOutlined,
-    FileOutlined,
-    TeamOutlined,
-    UserOutlined,
-} from "@ant-design/icons";
-import CustomHeader from '../header'
+import { Layout, Menu, Avatar, Popover } from "antd";
+import { useHistory } from "react-router-dom";
+import { DashboardOutlined, SettingOutlined, FileDoneOutlined, UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import CustomHeader from "../header";
+import logo from "Resources/psyduck.png";
 import "./index.scss";
-const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+const { Header, Content, Sider } = Layout;
 const CustomLayout = ({ children }) => {
-    const [state, setState] = useState(false);
-    const isAuthorized = true;
+    const history = useHistory();
+    const [collapsed, setCollapse] = useState(false);
+    const isAuthorized = JSON.parse(localStorage.getItem("auth"))?.jwtToken;
     const onCollapse = (collapsed) => {
-        setState(collapsed);
+        setCollapse(collapsed);
     };
+    const handleLogout = () => {
+        localStorage.clear();
+        history.push("/login");
+    };
+    const content = (
+        <div className="custom-left-header">
+            <div className="item">
+                <UserOutlined /> <span>Profile</span>
+            </div>
+            <div className="item" onClick={handleLogout}>
+                <LogoutOutlined /> <span>Log out</span>
+            </div>
+        </div>
+    );
     return (
         <Fragment>
             {isAuthorized ? (
                 <Layout style={{ minHeight: "100vh" }}>
-                    <Sider
-                        collapsible
-                        collapsed={state}
-                        onCollapse={onCollapse}
-                    >
-                        <div className="logo" />
-                        <Menu
-                            theme="dark"
-                            defaultSelectedKeys={["1"]}
-                            mode="inline"
-                        >
-                            <Menu.Item key="1" icon={<PieChartOutlined />}>
+                    <Sider collapsible onCollapse={onCollapse} collapsed={collapsed}>
+                        <div className="logo" style={{ height: 32, margin: 16, background: "rgba(255, 255, 255, 0.3)" }} />
+                        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+                            <Menu.Item key="1" icon={<DashboardOutlined />}>
                                 Dashboard
                             </Menu.Item>
-                            <Menu.Item key="2" icon={<DesktopOutlined />}>
+                            <Menu.Item key="2" icon={<FileDoneOutlined />}>
+                                Admin
+                            </Menu.Item>
+                            <Menu.Item key="3" icon={<SettingOutlined />}>
                                 Settings
                             </Menu.Item>
-                            <SubMenu
-                                key="sub1"
-                                icon={<UserOutlined />}
-                                title="Admin"
-                            >
-                                <Menu.Item key="3">Account</Menu.Item>
-                                <Menu.Item key="4">Authentication</Menu.Item>
-                            </SubMenu>
-                            <Menu.Item key="9" icon={<FileOutlined />} />
                         </Menu>
                     </Sider>
                     <Layout className="site-layout">
                         <Header
                             className="site-layout-background"
-                            style={{ padding: 0 }}
-                        />
-                        <Content style={{ margin: "0 16px" }}>
+                            style={{ padding: "0 20px", display: "flex", justifyContent: "flex-end", alignItems: "center" }}
+                        >
+                            <Popover style={{ padding: 0 }} placement="bottomLeft" title={null} content={content}>
+                                <Avatar src={logo} />
+                            </Popover>
+                        </Header>
+                        <Content
+                            className="site-layout-background"
+                            style={{
+                                margin: "24px 16px",
+                                padding: 24,
+                                minHeight: 280,
+                            }}
+                        >
                             {children}
                         </Content>
-                        <Footer style={{ textAlign: "center" }}>
-                            Rango Entertainment
-                        </Footer>
                     </Layout>
                 </Layout>
             ) : (

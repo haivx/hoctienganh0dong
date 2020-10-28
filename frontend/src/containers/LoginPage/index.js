@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Alert } from "antd";
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom'
+import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 
 import API from "Utils/API";
 
 const LoginPage = () => {
+    const dispatch = useDispatch();
+    const history = useHistory()
     const [error, setError] = useState("");
     const onLogin = ({ email, password }) => {
         console.log("values", { email, password });
@@ -18,7 +22,8 @@ const LoginPage = () => {
                 const currentUser = { ...auth.user, company: auth.company };
                 dispatch({ type: "LOGIN", currentUser });
                 localStorage.setItem("auth", JSON.stringify(res.data));
-                toast(res.message, {type: toast.TYPE.SUCCESS})
+                toast('ĐĂNG NHẬP THÀNH CÔNG', {type: toast.TYPE.SUCCESS})
+                history.push('/admin')
             }
         });
     };
