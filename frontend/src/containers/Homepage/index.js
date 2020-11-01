@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
+import React, { useEffect } from "react";
 import { TwitterOutlined, CustomerServiceOutlined, TeamOutlined, ThunderboltOutlined } from "@ant-design/icons";
 import img from "../../assets/1.jpeg";
+import { useHistory } from 'react-router-dom'
 import Layout from "../../components/layout";
 import teacherHref from "../../assets/teacher.png";
 import classHref from "../../assets/class.png";
@@ -11,6 +12,15 @@ import course2 from "../../assets/korean.png";
 import course3 from '../../assets/japanese.png';
 
 const HomePage = () => {
+    const history = useHistory()
+
+    const isAuthorized = JSON.parse(localStorage.getItem("auth"))?.accessToken;
+    useEffect(() => {
+        if(!!isAuthorized) {
+            history.push('/admin')
+        }
+    }, [isAuthorized]);
+
     return (
         <Layout>
             <div className="slider flex">

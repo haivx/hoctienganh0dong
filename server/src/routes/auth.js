@@ -8,6 +8,7 @@ export default function () {
     router.post("/login", userController.login);
     router.post("/register", userController.register);
     router.get("/list-user", userController.listUser);
+    router.post("/refresh-token", userController.refreshToken)
     // router.post("/updateUser", middlewareApiKey.checkApiKey, userController.updateUser);
     // router.delete("/:id", middlewareApiKey.checkApiKey, middlewareAuthToken.verifyToken, (req, res, next) => {
     //     res.send("delete");

@@ -9,7 +9,7 @@ const { Header, Content, Sider } = Layout;
 const CustomLayout = ({ children }) => {
     const history = useHistory();
     const [collapsed, setCollapse] = useState(false);
-    const isAuthorized = JSON.parse(localStorage.getItem("auth"))?.jwtToken;
+    const isAuthorized = JSON.parse(localStorage.getItem("auth"))?.accessToken;
     const onCollapse = (collapsed) => {
         setCollapse(collapsed);
     };

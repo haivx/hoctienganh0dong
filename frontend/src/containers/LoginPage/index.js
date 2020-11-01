@@ -12,7 +12,6 @@ const LoginPage = () => {
     const history = useHistory()
     const [error, setError] = useState("");
     const onLogin = ({ email, password }) => {
-        console.log("values", { email, password });
         API.post("auth/login", { email, password }, (res, err) => {
             if (res.code !== 0) {
                 setError(res.message);

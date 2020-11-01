@@ -2,8 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import reducers from './reducers'
 import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
-
-const middleware = [thunkMiddleware]
+import { jwt } from './actions/authAction';
+const middleware = [jwt , thunkMiddleware]
 
 if(process.env.NODE_ENV != 'production') {
   const logger = createLogger({

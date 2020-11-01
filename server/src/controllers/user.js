@@ -33,7 +33,6 @@ const listUser = async (req, res, next) => {
         const query = req.query;
 
         if (!isEmpty(query)) {
-            console.log('query.full_name', query.full_name)
             let filter = {};
             if (query.full_name) {
                 filter = {
@@ -49,9 +48,8 @@ const listUser = async (req, res, next) => {
             });
             res.send(response);
             return;
-        } 
+        }
         const response = await models.User.findAll();
-        console.log("RES", response);
         res.send({
             code: 0,
             data: response,
@@ -67,8 +65,24 @@ const listUser = async (req, res, next) => {
     }
 };
 
+const refreshToken = async function (req, res, next) {
+    try {
+        const { refreshToken, email } = req.body;
+        const response = await models.User.refreshToken(refreshToken, email);
+        res.send(response);
+    } catch (err) {
+        res.send({
+            code: -1,
+            data: {
+                message: err,
+            },
+        });
+    }
+};
+
 module.exports = {
     login,
     register,
     listUser,
+    refreshToken,
 };

@@ -38,6 +38,7 @@ class API {
                 callback(response.data);
             })
             .catch((error) => {
+                console.log("API", error)
                 let error_message = get(error, "response.data.message", "");
                 callback(null, error_message);
             });

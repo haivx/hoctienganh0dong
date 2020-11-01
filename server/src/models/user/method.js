@@ -8,10 +8,7 @@ export default function (User, models) {
             ...user,
             customer: (
                 await this.getCustomer({
-                    attributes: [
-                        "id",
-                        "card_brand",
-                    ],
+                    attributes: ["id", "card_brand"],
                 })
             ).toJSON(),
             avatar: this.avatarUrl(),
@@ -20,10 +17,21 @@ export default function (User, models) {
     };
 
     User.prototype.getLoginDetail = async function () {
-        const jwtToken = jwt.sign({ payload: this.id }, process.env.API_KEY, {
+        const accessToken = jwt.sign({ payload: this.id }, process.env.API_KEY, {
             expiresIn: "365d",
         });
+        const refreshToken = jwt.sign({ payload: this.id }, process.env.API_KEY, {
+            expiresIn: 300,
+        });
         const user = await this.asJson();
-        return { jwtToken, user };
+        return {
+            accessToken,
+            refreshToken,
+            user: {
+                phone: user.phone,
+                email: user.email,
+                full_name: user.full_name,
+            },
+        };
     };
 }
