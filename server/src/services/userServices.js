@@ -20,6 +20,7 @@ async function signUp(params) {
         }
     }
     return await User.create({
+        id: 2,
         role_id: 1,
         email: params.email,
         encryptedPassword: passwordHash,

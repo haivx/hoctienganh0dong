@@ -21,6 +21,11 @@ const AsyncAdminPage = Loadable({
     loading: Loading,
 });
 
+const AsyncPostsPage = Loadable({
+    loader: () => import("Containers/PostsPage"),
+    loading: Loading,
+});
+
 export default () => {
     return (
         <Provider store={store}>
@@ -28,6 +33,7 @@ export default () => {
                 <Switch>
                     <Route exact path="/" component={AsyncHomePage} />
                     <Route exact path="/login" component={AsyncLoginPage} />
+                    <Route exact path="/posts" component={AsyncPostsPage} />
                     <Route exact path="/admin" component={AsyncAdminPage} />
                 </Switch>
             </Router>

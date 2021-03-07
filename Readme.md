@@ -14,4 +14,4 @@
 ```
 
 - Note: Because of table relationship, be aware of ordering migration file.
-- User account: nobody@gmail.com/123456
+- User account: nobody@gmail.com/123456 Or SignIn with Google firebase :)
