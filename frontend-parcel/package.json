@@ -10,7 +10,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
     "antd": "^4.7.3",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "components": "^0.1.0",
     "firebase": "^8.3.0",
