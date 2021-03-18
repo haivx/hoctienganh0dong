@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useContext, useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import Loadable from 'react-loadable'
 import {
@@ -9,10 +9,9 @@ import {
 } from 'react-router-dom'
 import Layout from '@components/layout'
 import Loading from '@components/Loading'
-import { authFirebase } from '@config/firebase'
-import { createUserProfileDocument } from '@config/firebase'
 import 'react-toastify/dist/ReactToastify.css'
 import './src/styles/index.scss'
+import { UserContext } from './src/providers/UserProvider'
 
 const AsyncLoginPage = Loadable({
     loader: () => import('@containers/login'),
@@ -21,41 +20,16 @@ const AsyncLoginPage = Loadable({
 
 const App = () => {
     const history = useHistory()
-    const [user, setCurrentUser] = useState(null)
-    useEffect(() => {
-        if (user?.uid) {
-            history.push('/admin/dashboard')
-        } else {
-            history.push('/login')
-        }
-    }, [user?.uid])
+    const user = useContext(UserContext)
+    // useEffect(() => {
+    //     console.log('useruseruseruser', user, window.location.pathname)
+    //     if (user && window.location.pathname === "/login") {
+    //         history.push('/admin/dashboard')
+    //     } else {
+    //         history.push('/login')
+    //     }
+    // }, [user])
 
-    useEffect(() => {
-        let unsubscribeFromAuth = null
-        async function auth() {
-            unsubscribeFromAuth = authFirebase.onAuthStateChanged(
-                async (userAuth) => {
-                    const user = await createUserProfileDocument(userAuth)
-                    console.log('UserUser App', user)
-                    if (user) {
-                        const currentUser = {
-                            photoURL: user.photoURL,
-                            uid: user.uid,
-                            email: user.email,
-                            displayName: user.displayName,
-                        }
-                        localStorage.setItem(
-                            'auth',
-                            JSON.stringify(currentUser)
-                        )
-                        setCurrentUser(currentUser)
-                    }
-                }
-            )
-        }
-        auth()
-        return () => unsubscribeFromAuth()
-    }, [])
     return (
         <Fragment>
             <Router>
