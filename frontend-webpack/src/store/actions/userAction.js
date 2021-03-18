@@ -5,7 +5,7 @@ import { FETCH_LIST_USER_SUCCESS, FETCH_LIST_USER_FAIL} from './constants';
 const fetchUsers = () => (dispatch) => {
     try {
          API.get('/auth/list-user', {}, (response) => {
-            if(response.code === 0) {
+            if(response?.code === 0) {
                 dispatch({
                     type: FETCH_LIST_USER_SUCCESS,
                     data: response.data,
@@ -18,7 +18,7 @@ const fetchUsers = () => (dispatch) => {
                     type: FETCH_LIST_USER_FAIL,
                     data: []
                 })
-                toast.error(response.message)
+                toast.error(response?.message)
             }
         });
     } catch (error ){

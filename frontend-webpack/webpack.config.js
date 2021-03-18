@@ -40,6 +40,7 @@ module.exports = ({ mode = "production", presets = [] }) => {
             },
             devServer: {
                 historyApiFallback: true,
+                hot: true,
             },
             plugins: [
                 new webpack.ProgressPlugin(),
@@ -47,6 +48,7 @@ module.exports = ({ mode = "production", presets = [] }) => {
                     template: "./public/index.html",
                     filename: "./index.html",
                 }),
+                new webpack.HotModuleReplacementPlugin()
             ],
             resolve: {
                 alias: {

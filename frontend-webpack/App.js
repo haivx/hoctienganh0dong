@@ -1,9 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { ToastContainer } from 'react-toastify'
 import Loadable from 'react-loadable'
-import { Provider } from 'react-redux'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import configureStore from '@store'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    useHistory,
+} from 'react-router-dom'
 import Layout from '@components/layout'
 import Loading from '@components/Loading'
 import { authFirebase } from '@config/firebase'
@@ -11,36 +14,40 @@ import { createUserProfileDocument } from '@config/firebase'
 import 'react-toastify/dist/ReactToastify.css'
 import './src/styles/index.scss'
 
-const store = configureStore()
 const AsyncLoginPage = Loadable({
     loader: () => import('@containers/login'),
     loading: Loading,
 })
 
-const App = (props) => {
+const App = () => {
+    const history = useHistory()
     const [user, setCurrentUser] = useState(null)
     useEffect(() => {
-        if (window.location.pathname !== '/login' && !user.accessToken) {
-            window.location.href = '/login'
+        if (user?.uid) {
+            history.push('/admin/dashboard')
+        } else {
+            history.push('/login')
         }
-    }, [])
-    console.log('User', user)
-    let unsubscribeFromAuth = null
+    }, [user?.uid])
+
     useEffect(() => {
+        let unsubscribeFromAuth = null
         async function auth() {
             unsubscribeFromAuth = authFirebase.onAuthStateChanged(
                 async (userAuth) => {
                     const user = await createUserProfileDocument(userAuth)
-                    console.log('UserUser', user)
+                    console.log('UserUser App', user)
                     if (user) {
                         const currentUser = {
-                            accessToken: user.refreshToken,
+                            photoURL: user.photoURL,
                             uid: user.uid,
                             email: user.email,
                             displayName: user.displayName,
                         }
-                        // localStorage.setItem("auth", JSON.stringify(data));
-                        console.log('UserUser', currentUser)
+                        localStorage.setItem(
+                            'auth',
+                            JSON.stringify(currentUser)
+                        )
                         setCurrentUser(currentUser)
                     }
                 }
@@ -51,14 +58,12 @@ const App = (props) => {
     }, [])
     return (
         <Fragment>
-            <Provider store={store}>
-                <BrowserRouter>
-                    <Switch>
-                        <Route path={'/login'} component={AsyncLoginPage} />
-                        <Route path={'/'} component={Layout} />
-                    </Switch>
-                </BrowserRouter>
-            </Provider>
+            <Router>
+                <Switch>
+                    <Route path="/login" component={AsyncLoginPage} />
+                    <Route path="/" component={Layout} />
+                </Switch>
+            </Router>
             <ToastContainer
                 position="top-right"
                 autoClose={2000}

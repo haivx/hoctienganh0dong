@@ -1,5 +1,6 @@
 {
   "projects": {
     "default": "hoctienganh0dong-62551"
-  }
+  },
+  "plugins": ["@babel/plugin-transform-runtime"]
 }
