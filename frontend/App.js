@@ -11,7 +11,6 @@ import Layout from '@components/layout'
 import Loading from '@components/Loading'
 import 'react-toastify/dist/ReactToastify.css'
 import './src/styles/index.scss'
-import { UserContext } from './src/providers/UserProvider'
 
 const AsyncLoginPage = Loadable({
     loader: () => import('@containers/login'),
@@ -20,7 +19,6 @@ const AsyncLoginPage = Loadable({
 
 const App = () => {
     const history = useHistory()
-    const user = useContext(UserContext)
     // useEffect(() => {
     //     console.log('useruseruseruser', user, window.location.pathname)
     //     if (user && window.location.pathname === "/login") {

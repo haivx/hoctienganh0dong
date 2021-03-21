@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Input, Button } from 'antd'
-import { firestore } from '@config/firebase'
 import Layout from '@components/layout'
 import './index.scss'
-import { collectIdsAndDocs } from '@utils/helpers'
-import { PostContext } from '../../../providers/PostProvider'
 
 const PostsPage = () => {
     const [state, _setState] = useState({
         post: {},
-    }) 
+        posts: [],
+    })
     const setState = (data) => {
         _setState({
             ...state,
@@ -28,13 +26,9 @@ const PostsPage = () => {
                 displayName: auth.displayName,
             },
         }
-
-        await firestore.collection('posts').add(newPost)
     }
 
-    const handleDelete = (id) => async (value) => {
-        await firestore.doc(`posts/${id}`).delete()
-    }
+    const handleDelete = (id) => async (value) => {}
 
     const onChange = (type) => (e) => {
         setState({
@@ -57,23 +51,19 @@ const PostsPage = () => {
                     </Button>
                 </div>
                 <div className="post">
-                    <PostContext.Consumer>
-                        {posts => (posts?.posts || []).map((item) => (
-                                <div key={item.id}>
-                                    <div className="post__content">
-                                        {item.title}
-                                    </div>
-                                    <div className="post__desc">
-                                        <textarea rows={3}>{item.content}</textarea>
-                                    </div>
-                                    <div className="post__action">
-                                        <Button onClick={handleDelete(item.id)}>
-                                            Delete
-                                        </Button>
-                                    </div>
-                                </div>
-                            ))}
-                    </PostContext.Consumer>
+                    {state.posts.map((item) => (
+                        <div key={item.id}>
+                            <div className="post__content">{item.title}</div>
+                            <div className="post__desc">
+                                <textarea rows={3}>{item.content}</textarea>
+                            </div>
+                            <div className="post__action">
+                                <Button onClick={handleDelete(item.id)}>
+                                    Delete
+                                </Button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </Layout>

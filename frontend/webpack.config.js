@@ -54,13 +54,11 @@ module.exports = ({ mode = "production", presets = [] }) => {
                 alias: {
                     "@components": path.resolve(__dirname, "src/components/"),
                     "@containers": path.resolve(__dirname, "src/containers"),
-                    "@providers": path.resolve(__dirname, "src/providers"),
                     "@styles": path.resolve(__dirname, "src/styles"),
                     "@utils": path.resolve(__dirname, "src/utils"),
                     "@store": path.resolve(__dirname, "src/store"),
                     "@action": path.resolve(__dirname, "src/store/actions"),
                     "@resources": path.resolve(__dirname, "src/assets"),
-                    "@config": path.resolve(__dirname, "config"),
                 },
             },
         },

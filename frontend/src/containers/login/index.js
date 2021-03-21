@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import MD5 from "crypto-js/md5";
 import { toast } from 'react-toastify'
 import { Form, Input, Button } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import { signInWithGoogle } from '@config/firebase'
 import API from '@utils/api'
 
 const LoginPage = () => {
@@ -12,9 +12,8 @@ const LoginPage = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [error, setError] = useState('')
-    const onLogin = () => {}
-    ;({ email, password }) => {
-        API.post('auth/login', { email, password }, (res, err) => {
+    const onLogin = ({ email, password }) => {
+        API.post('auth/login', { email, password: MD5(password).toString() }, (res, err) => {
             if (res?.code !== 0) {
                 setError(res?.message)
                 toast(res?.message || 'Thông tin đăng nhập không đúng', {
@@ -76,13 +75,6 @@ const LoginPage = () => {
                         className="mt-3 mr-1 login-form-button w-2/6"
                     >
                         Log in
-                    </Button>
-                    <Button
-                        type="primary"
-                        onClick={signInWithGoogle}
-                        className="mt-3 ml-1 login-form-button w-2/6"
-                    >
-                        Sign in with Google
                     </Button>
                 </Form.Item>
             </Form>

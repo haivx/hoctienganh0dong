@@ -27,7 +27,6 @@ export const useDebounce = (value, delay = 700) => {
     return debouncedValue;
 };
 
-export const collectIdsAndDocs = (doc) => ({ id: doc.id, ...doc.data() });
 
 export const checkRole = (accessRoles, roles) => {
     if (!accessRoles || accessRoles.length < 1) {
