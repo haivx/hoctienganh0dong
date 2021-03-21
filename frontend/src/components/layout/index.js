@@ -26,6 +26,11 @@ const AsyncPostsPage = Loadable({
     loading: Loading,
 })
 
+const AsyncProfilePage = Loadable({
+    loader: () => import('@containers/admin/Profile'),
+    loading: Loading,
+})
+
 const AsyncHomePage = Loadable({
     loader: () => import('@containers/landing'),
     loading: Loading,
@@ -40,6 +45,11 @@ export const AdminPages = {
     post: {
         component: AsyncPostsPage,
         path: '/admin/post',
+        exact: true,
+    },
+    profile: {
+        component: AsyncProfilePage,
+        path: '/admin/profile',
         exact: true,
     },
 }

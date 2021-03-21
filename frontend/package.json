@@ -7,7 +7,8 @@
         "dev": "webpack-dev-server --env.mode development --open",
         "build": "webpack --env.mode production",
         "prod:analyze": "npm run build -- --env.presets analyze",
-        "prod:compress": "npm run build -- --env.presets compress"
+        "prod:compress": "npm run build -- --env.presets compress",
+        "deploy":  "npm run build && firebase deploy "
     },
     "repository": {
         "type": "git",
