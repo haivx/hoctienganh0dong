@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { checkRole } from "@utils/helpers";
 import { Redirect } from "react-router-dom";
 
-const PageWrapper = ({ auth, children, accessRoles }) => {
+const PageAuth = ({ auth, children, accessRoles }) => {
   const roles = auth?.auth?.authorities || [];
 
   if (checkRole(accessRoles, roles)) {
@@ -17,4 +17,4 @@ const mapState = (state) => ({
   auth: state?.auth,
 });
 
-export default connect(mapState)(PageWrapper);
+export default connect(mapState)(PageAuth);

@@ -1,0 +1,71 @@
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    &__left {
+        height: 100vh;
+        border-right: 1px solid #eeeeee;
+        .img {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            margin-left: 40px;
+            img {
+                max-width: 120px;
+            }
+        }
+        .menu {
+            ul {
+                width: 100%;
+                .item {
+                    cursor: pointer;
+                    padding: 8px 40px;
+                    display: flex;
+                    align-items: center;
+                    span {
+                        margin-right: 4px;
+                    }
+                    &:hover {
+                        background: #88f5b9;
+                    }
+                }
+                .item-group {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    .header-panel {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        border-bottom: 1px solid #eeeeee;
+        box-shadow: 0 2px 8px #f0f1f2;
+        margin-bottom: 10px;
+        &__left {
+            flex: 2;
+            .ant-input-affix-wrapper {
+                border-top-left-radius: 15px !important;
+                border-bottom-left-radius: 15px !important;
+            }
+            .ant-input-group-addon {
+                button {
+                    border-top-right-radius: 15px !important;
+                    border-bottom-right-radius: 15px !important;
+                }
+            }
+        }
+        &__right {
+            cursor: pointer;
+            flex: 3;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .profile {
+                margin-left: 10px;
+                > img {
+                    max-width: 50px;
+                }
+            }
+        }
+    }
+}

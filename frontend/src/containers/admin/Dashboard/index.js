@@ -136,96 +136,94 @@ const AdminPage = () => {
     }
 
     return (
-        <Layout>
-            <div className="admin-page">
-                <PageHeader
-                    ghost={false}
-                    // onBack={() => window.history.back()}
-                    title="Danh sách tài khoản"
-                    subTitle=""
-                    extra={[
-                        <Button key="1" type="primary" onClick={handleOpenAdd}>
-                            Thêm mới
-                        </Button>,
-                    ]}
+        <div className="admin-page">
+            <PageHeader
+                ghost={false}
+                // onBack={() => window.history.back()}
+                title="Danh sách tài khoản"
+                subTitle=""
+                extra={[
+                    <Button key="1" type="primary" onClick={handleOpenAdd}>
+                        Thêm mới
+                    </Button>,
+                ]}
+            >
+                <Table
+                    columns={columns}
+                    dataSource={listUser.data}
+                    pagination={false}
+                    bordered
+                />
+                <Modal
+                    className="modal-add-user"
+                    title="Thêm mới"
+                    visible={state.visibleAdd}
+                    onCancel={handleClose}
+                    footer={null}
                 >
-                    <Table
-                        columns={columns}
-                        dataSource={listUser.data}
-                        pagination={false}
-                        bordered
-                    />
-                    <Modal
-                        className="modal-add-user"
-                        title="Thêm mới"
-                        visible={state.visibleAdd}
-                        onCancel={handleClose}
-                        footer={null}
-                    >
-                        <Form name="basic" onFinish={onAdd} {...layout}>
-                            <Form.Item
-                                label="FullName"
-                                name="fullName"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input fullName!',
-                                    },
-                                ]}
-                            >
-                                <Input />
-                            </Form.Item>
+                    <Form name="basic" onFinish={onAdd} {...layout}>
+                        <Form.Item
+                            label="FullName"
+                            name="fullName"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input fullName!',
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                            <Form.Item
-                                label="Email"
-                                name="email"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your email!',
-                                    },
-                                ]}
-                            >
-                                <Input />
-                            </Form.Item>
+                        <Form.Item
+                            label="Email"
+                            name="email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your email!',
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                            <Form.Item
-                                label="Phone"
-                                name="Phone"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input phone!',
-                                    },
-                                ]}
-                            >
-                                <Input />
-                            </Form.Item>
-                            <Form.Item
-                                label="Password"
-                                name="password"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your password!',
-                                    },
-                                ]}
-                            >
-                                <Input.Password />
-                            </Form.Item>
-                            <Form.Item {...tailLayout}>
-                                <Button type="primary" htmlType="submit">
-                                    Submit
-                                </Button>
-                                <Button type="danger" onClick={handleClose}>
-                                    Cancel
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                    </Modal>
-                </PageHeader>
-            </div>
-        </Layout>
+                        <Form.Item
+                            label="Phone"
+                            name="Phone"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input phone!',
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="Password"
+                            name="password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your password!',
+                                },
+                            ]}
+                        >
+                            <Input.Password />
+                        </Form.Item>
+                        <Form.Item {...tailLayout}>
+                            <Button type="primary" htmlType="submit">
+                                Submit
+                            </Button>
+                            <Button type="danger" onClick={handleClose}>
+                                Cancel
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Modal>
+            </PageHeader>
+        </div>
     )
 }
 

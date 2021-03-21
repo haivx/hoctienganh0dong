@@ -1,71 +1,75 @@
-import React, { Suspense, useState } from 'react'
-import Loadable from 'react-loadable'
-import Loading from '@components/Loading'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import PageWrapper from '@components/PageWrapper'
-import './index.scss'
-import Admin from '@containers/admin'
+import React from 'react'
+import { Row, Col, Input } from 'antd'
+import {
+    RocketOutlined,
+    AudioOutlined,
+    SolutionOutlined,
+    DownloadOutlined,
+    DashboardOutlined,
+    CustomerServiceOutlined,
+    BellOutlined,
+} from '@ant-design/icons'
+import logo from '@resources/admin/logo.png'
+import profle from '@resources/teacher.png'
+import './style.scss'
+const { Search } = Input
 
-const RenderPage = (Component, accessRoles = []) => (props) => {
+const Layout = ({ children }) => {
     return (
-        <Suspense fallback={Loading}>
-            <PageWrapper accessRoles={accessRoles}>
-                <Component {...props} />
-            </PageWrapper>
-        </Suspense>
+        <div className="app-layout">
+            <Row>
+                <Col span={4}>
+                    <div className="app-layout__left">
+                        <div className="img">
+                            <img src={logo} alt="" />
+                        </div>
+                        <div className="menu">
+                            <ul>
+                                <li className="item">
+                                    <RocketOutlined /> Album
+                                </li>
+                                <li className="item">
+                                    <AudioOutlined /> Song
+                                </li>
+                                <li className="item">
+                                    <SolutionOutlined /> Artist
+                                </li>
+                                <li className="item item-group">My Track</li>
+                                <li className="item">
+                                    <CustomerServiceOutlined /> Favorites
+                                </li>
+                                <li className="item">
+                                    <DashboardOutlined /> History
+                                </li>
+                                <li className="item">
+                                    <DownloadOutlined /> Download Items
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </Col>
+                <Col span={20}>
+                    <div className="header-panel">
+                        <div className="header-panel__left">
+                            <Search
+                                placeholder="Search your entertainment "
+                                allowClear
+                            />
+                        </div>
+                        <div className="header-panel__right">
+                            <div className="noti">
+                                <BellOutlined style={{ fontSize: 30 }} />
+                            </div>
+                            <div className="profile">
+                                <img src={profle} alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    {children}
+                </Col>
+            </Row>
+        </div>
     )
 }
 
-const AsyncDashboardPage = Loadable({
-    loader: () => import('../../containers/admin/Dashboard'),
-    loading: Loading,
-})
-
-const AsyncPostsPage = Loadable({
-    loader: () => import('@containers/admin/Posts'),
-    loading: Loading,
-})
-
-const AsyncHomePage = Loadable({
-    loader: () => import('@containers/landing'),
-    loading: Loading,
-})
-
-export const AdminPages = {
-    dashboard: {
-        component: AsyncDashboardPage,
-        path: '/admin/dashboard',
-        exact: true,
-    },
-    post: {
-        component: AsyncPostsPage,
-        path: '/admin/post',
-        exact: true,
-    },
-}
-
-const routes = {
-    admin: {
-        component: RenderPage(Admin, []),
-        path: '/admin',
-    },
-    landing: {
-        component: RenderPage(AsyncHomePage, []),
-        path: '/',
-        exact: true,
-    },
-}
-
-export default (props) => (
-    <Switch>
-        {Object.keys(routes).map((key) => (
-            <Route
-                key={key}
-                path={routes[key].path}
-                component={routes[key].component}
-                exact={routes[key].exact}
-                {...props}
-            />
-        ))}
-    </Switch>
-)
+export default Layout
