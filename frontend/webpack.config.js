@@ -41,6 +41,8 @@ module.exports = ({ mode = "production", presets = [] }) => {
             devServer: {
                 historyApiFallback: true,
                 hot: true,
+                host: '0.0.0.0',
+                port: 5000,
             },
             plugins: [
                 new webpack.ProgressPlugin(),
