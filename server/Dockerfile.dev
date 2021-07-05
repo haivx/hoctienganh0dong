@@ -1,0 +1,14 @@
+FROM node:14.14.0-alpine
+
+WORKDIR /app
+
+COPY ./package.json ./
+
+RUN npm install
+
+COPY . .
+
+# RUN npx sequelize-cli db:migrate
+# RUN npx sequelize-cli db:seed:all
+
+CMD ["npm", "run", "dev"]

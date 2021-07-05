@@ -12,12 +12,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Schedules.belongsTo(models.Courses, {
         as: "course",
-        foreignKey: "course_id",
+        foreignKey: "schedule_id",
     });
     }
   };
   Schedules.init({
-    course_id: DataTypes.STRING,
+    id: {
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+    },
     class_level: DataTypes.STRING,
     class_id: DataTypes.INTEGER,
     schedule_class: DataTypes.STRING,

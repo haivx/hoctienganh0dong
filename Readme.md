@@ -1,17 +1,11 @@
 <h1>Starter guide</h1>
-<h3>Database:</h3>
-
-1. Create database in local.
-
-2. Update database config file: `/bin/database.js`:
-- Note: Grant all privileges to curent user 
-
-3. Run command line to migrate and seed:
 
 ```js
-    npm run --sequelize -- db:migrate 
-    npm run --sequelize -- db:seed:all
+    docker-compose up --build
 ```
 
-- Note: Because of table relationship, be aware of ordering migration file.
-- User account: nobody@gmail.com/123456 Or SignIn with Google firebase :)
+<h3>Access database:</h3>
+
+```js
+    psql some_username -h database_host -d some_database
+```

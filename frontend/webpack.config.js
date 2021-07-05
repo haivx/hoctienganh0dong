@@ -43,6 +43,8 @@ module.exports = ({ mode = "production", presets = [] }) => {
                 hot: true,
                 host: '0.0.0.0',
                 port: 5000,
+                public: '0.0.0.0:5050',
+                disableHostCheck: true, // this is security issue, only using in development
             },
             plugins: [
                 new webpack.ProgressPlugin(),
