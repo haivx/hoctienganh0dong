@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "cross-env PORT=5000 nodemon --max_old_space_size=4099 ./bin/www",
+    "start": "cross-env PORT=5000 nodemon --max_old_space_size=4099 ./bin/www",
     "sequelize": "cross-env PORT=5000 NODE_PATH=. sequelize",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
