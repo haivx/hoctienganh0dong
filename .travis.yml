@@ -9,6 +9,6 @@ script:
   - docker run -e CI=true xuanhai/react-test npm test
 
 after_success:
-  - docker build -t xuanhai/muti-client ./client
+  - docker build -t xuanhai/muti-client ./frontend
   - docker build -t xuanhai/muti-server ./server
   - docker build -t xuanhai/muti-nginx ./nginx
