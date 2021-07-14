@@ -1,0 +1,30 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "frontend",
+            "image": "xuanhai/muti-client",
+            "hostname": "frontend",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "xuanhai/muti-server",
+            "hostname": "server",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "xuanhai/muti-nginx",
+            "hostname": "api",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["server", "frontend"]
+        }
+    ]
+}
