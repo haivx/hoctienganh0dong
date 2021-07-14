@@ -42,8 +42,8 @@ module.exports = ({ mode = "production", presets = [] }) => {
                 historyApiFallback: true,
                 hot: true,
                 host: '0.0.0.0',
-                port: 5000,
-                public: '0.0.0.0:5050',
+                port: 8000,
+                public: '0.0.0.0:8000',
                 disableHostCheck: true, // this is security issue, only using in development
             },
             plugins: [

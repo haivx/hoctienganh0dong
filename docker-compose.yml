@@ -12,8 +12,6 @@ services:
             - ./db:/docker-entrypoint-initdb.d/
         ports:
             - 5432:5432
-    # redis:
-    #     image: "redis:latest"
     nginx:
         restart: always
         depends_on:
@@ -23,7 +21,7 @@ services:
             dockerfile: Dockerfile.dev
             context: ./nginx
         ports:
-            - "5050:80"
+            - "8000:80"
     api:
         build:
             dockerfile: Dockerfile.dev
